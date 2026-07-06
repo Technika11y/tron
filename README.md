@@ -21,6 +21,13 @@
 
 ---
 
+## Quick start
+
+```bash
+git clone https://github.com/technika11y/tron && cd tron
+PYTHONPATH=src python3 -m tron.cli patrol examples/policy.json examples/observed.jsonl
+```
+
 ## Status
 
 | Capability | State |

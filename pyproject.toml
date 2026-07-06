@@ -1,0 +1,18 @@
+[project]
+name = "technika11y-tron"
+version = "0.1.0a0"
+description = "The Grid guardian — patrols observed network traffic against a sanctioned-flow policy and flags intrusions. Runtime companion to kitchen-microsegmenter."
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+keywords = ["security", "ids", "zero-trust", "monitoring", "iot"]
+
+[project.scripts]
+tron = "tron.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["tron"]

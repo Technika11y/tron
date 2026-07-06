@@ -1,0 +1,3 @@
+{"src_zone":"boh","dst_zone":"iot","port":1883}
+{"src_zone":"iot","dst_zone":"pos","port":443}
+{"src_zone":"pos","dst_zone":"boh","port":8080}

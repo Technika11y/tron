@@ -1,0 +1,6 @@
+{
+  "zones": { "iot": "iot", "boh": "boh", "pos": "pos" },
+  "flows": [
+    { "src_zone": "boh", "dst_zone": "iot", "port": 1883 }
+  ]
+}

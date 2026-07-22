@@ -25,6 +25,16 @@ def _tier(policy, zone):
 def classify(policy, conn, sanctioned=None):
     """Classify one observed connection: sanctioned / intrusion / unsanctioned."""
     sanctioned = sanctioned_set(policy) if sanctioned is None else sanctioned
+
+    # A zone the policy never declared can't be reasoned about — say so rather than quietly
+    # filing it under "unsanctioned". Unknown is not the same as disallowed.
+    zones = policy.get("zones", {})
+    undeclared = [z for z in (conn.get("src_zone"), conn.get("dst_zone")) if z not in zones]
+    if undeclared:
+        return {"verdict": "unknown-zone",
+                "reason": f'references undeclared zone(s) {", ".join(map(str, undeclared))} — '
+                          f'trust cannot be evaluated; declare them in the policy'}
+
     key = (conn.get("src_zone"), conn.get("dst_zone"), conn.get("port"))
 
     if key in sanctioned:
@@ -46,3 +56,8 @@ def patrol(policy, connections):
 
 def has_intrusions(results):
     return any(r["verdict"] == "intrusion" for r in results)
+
+
+def has_unknown_zones(results):
+    """Blind spots: traffic the policy can't classify at all."""
+    return any(r["verdict"] == "unknown-zone" for r in results)

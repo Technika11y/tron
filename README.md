@@ -35,6 +35,7 @@ PYTHONPATH=src python3 -m tron.cli patrol examples/policy.json examples/observed
 |---|---|
 | Classify an observed connection vs. sanctioned flows (sanctioned / intrusion / unsanctioned) | ✅ works, tested |
 | Trust-tier awareness (a lower zone reaching a higher one = intrusion) | ✅ works, tested |
+| Flags traffic from **undeclared zones** as `unknown-zone` — a blind spot, not a silent "unsanctioned" | ✅ works, tested |
 | `patrol` a batch of observed connections; exit 1 on any intrusion | ✅ works, tested |
 | Live capture / NetFlow / pcap ingestion | ❌ not built — you supply the observed connections |
 

@@ -30,7 +30,8 @@ def main(argv=None):
         policy = json.load(fh)
     results = patrol(policy, _load_jsonl(args.observed))
 
-    glyph = {"sanctioned": "  ok  ", "unsanctioned": " warn ", "intrusion": "▲ ROGUE"}
+    glyph = {"sanctioned": "  ok  ", "unsanctioned": " warn ", "intrusion": "▲ ROGUE",
+             "unknown-zone": "? BLIND"}
     for r in results:
         print(f"{glyph.get(r['verdict'], '  ?  ')}  "
               f"{r.get('src_zone')}->{r.get('dst_zone')}:{r.get('port')}  {r['reason']}",
